@@ -1,0 +1,143 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Analytics Service",
+    "version": "1.0.0",
+    "title": "Analytics Service"
+  },
+  "basePath": "/api",
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "tags": [
+    {
+      "name": "AS",
+      "description": "Everything about Analytics Service"
+    }
+  ],
+  "paths": {
+    "/collect/": {
+      "post": {
+        "security": [{ "Bearer": [] }],
+        "tags": [
+          "Collect"
+        ],
+        "summary": "Collect data",
+        "description": "Collect and process data due to payload",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": { "type": "number" },
+                "pageId": { "type": "number" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Normal response",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/page-views/page-id/{id}": {
+      "get": {
+        "security": [{ "Bearer": [] }],
+        "tags": ["Get stats"],
+        "summary": "Page stats",
+        "description": "Returns page-views for specified page-id",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of page",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Normal response"
+          }
+        }
+      }
+    },
+    "/page-views/browser/{browser}": {
+      "get": {
+        "security": [{ "Bearer": [] }],
+        "tags": ["Get stats"],
+        "summary": "Browser stats",
+        "description": "Returns page-views done from specified browser",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "browser",
+            "in": "path",
+            "description": "Browser",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Normal response"
+          }
+        }
+      }
+    },
+    "/page-views/country/{country}": {
+      "get": {
+        "security": [{ "Bearer": [] }],
+        "tags": ["Get stats"],
+        "summary": "Country stats",
+        "description": "Returns page-views for country",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "country",
+            "in": "path",
+            "description": "Name of country",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Normal response"
+          }
+        }
+      }
+    },
+    "/users-rate/": {
+      "get": {
+        "security": [{ "Bearer": [] }],
+        "tags": ["Get stats"],
+        "summary": "Get returning users rate",
+        "description": "Rate of returning users out of all the unique users who visited",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Normal response"
+          }
+        }
+      }
+    }
+  }
+}
